@@ -1,0 +1,13 @@
+.toy-filter{
+    display: flex;
+    flex-direction: column;
+
+
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:30px;
+    }
+    
+}

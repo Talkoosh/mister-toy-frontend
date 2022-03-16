@@ -1,0 +1,20 @@
+.app-header{
+    background-color: $clr1;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    >*{
+        margin-inline-end: 20px;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: $clr2;
+        font-weight: bold;
+        transition: color .3s;
+        &:hover{
+            color: red
+        }
+
+    }
+}
