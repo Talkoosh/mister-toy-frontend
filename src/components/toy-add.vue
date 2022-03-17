@@ -9,6 +9,7 @@
                 :key="label"
                 :label="label"
                 :value="label"
+                
             />
         </el-select>
         <button>Save</button>
