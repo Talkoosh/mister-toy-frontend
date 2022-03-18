@@ -1,5 +1,5 @@
 <template>
-    <app-header :user="user"></app-header>
+    <app-header @logout="logout" :user="user"></app-header>
     <router-view></router-view>
 </template>
 
@@ -18,6 +18,13 @@ export default {
     computed:{
         user(){
             return this.$store.getters.currUser
+        }
+    },
+    methods:{
+        async logout(){
+            console.log('hi');
+            await this.$store.dispatch('logout')
+            this.$router.push('/')
         }
     }
 }

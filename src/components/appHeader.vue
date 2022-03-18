@@ -1,8 +1,13 @@
 <template>
-        <h1 v-if="user">Hello {{user.fullname}}</h1>
     <section class="app-header">
-        <router-link to="/toy">Toys</router-link>
-        <router-link to="/toy/chart">Chart</router-link>
+        <div v-if="user">
+            <h1 >Hello {{ user.fullname }}</h1>
+            <el-button type="primary" @click="logout">Logout</el-button>
+        </div>
+        <div class="header-links">
+            <router-link to="/toy">Toys</router-link>
+            <router-link to="/toy/chart">Chart</router-link>
+        </div>
     </section>
 </template>
 
@@ -12,5 +17,15 @@ export default {
     props: {
         user: Object
     },
+    computed: {
+        isAdmin() {
+            return this.user.isAdmin
+        }
+    },
+    methods: {
+        logout(){
+            this.$emit('logout')
+        }
+    }
 }
 </script>

@@ -6,7 +6,8 @@ const authAxios = axios.create({
 
 export const userService = {
     signup,
-    login
+    login,
+    logout
 }
 
 const API = (process.env.NODE_ENV !== 'development')
@@ -27,6 +28,14 @@ async function login(user) {
         const loggedInUser = await authAxios.post(API + 'login', user);
         return loggedInUser.data;
     } catch (err) {
+        throw err
+    }
+}
+
+async function logout(){
+    try {
+      return await authAxios.post(API + 'logout');
+    } catch(err){
         throw err
     }
 }

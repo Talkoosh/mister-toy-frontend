@@ -1,11 +1,15 @@
 .app-header{
+    
     background-color: $clr1;
     height: 200px;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 0 10px;
 
-    >*{
+
+    .header-links > a{
         margin-inline-end: 20px;
         text-decoration: none;
         font-size: 1.5rem;

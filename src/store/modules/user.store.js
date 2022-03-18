@@ -9,6 +9,9 @@ export const userStore = {
     mutations: {
         login(state, { user }) {
             state.loggedInUser = user;
+        },
+        logout(state){
+            state.loggedInUser = null;
         }
     },
     actions: {
@@ -27,6 +30,10 @@ export const userStore = {
             } catch(err){
                 // console.log(err)
             }
+        },
+        async logout({commit}){
+            await userService.logout()
+            commit('logout')
         }
     },
     getters : {
