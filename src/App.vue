@@ -1,5 +1,5 @@
 <template>
-    <app-header></app-header>
+    <app-header :user="user"></app-header>
     <router-view></router-view>
 </template>
 
@@ -15,6 +15,11 @@ export default {
         appHeader,
         toyApp
     },
+    computed:{
+        user(){
+            return this.$store.getters.currUser
+        }
+    }
 }
 </script>
 

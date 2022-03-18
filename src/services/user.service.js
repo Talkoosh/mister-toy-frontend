@@ -16,7 +16,7 @@ const API = (process.env.NODE_ENV !== 'development')
 async function signup(user) {
     try {
         const newUser = await authAxios.post(API + 'signup', user);
-        return newUser;
+        return newUser.data;
     } catch (err) {
         throw err
     }
@@ -24,9 +24,8 @@ async function signup(user) {
 
 async function login(user) {
     try {
-        console.log(user);
         const loggedInUser = await authAxios.post(API + 'login', user);
-        return loggedInUser;
+        return loggedInUser.data;
     } catch (err) {
         throw err
     }

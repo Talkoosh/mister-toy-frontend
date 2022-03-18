@@ -70,11 +70,14 @@ export default {
         }
     },
     methods: {
-        signup() {
-            this.$store.dispatch({type:'signup', newUser: this.userSignup})
+        async signup() {
+            await this.$store.dispatch({ type: 'signup', newUser: this.userSignup })
+            this.$router.push('/toy')
+
         },
-        login() {
-            this.$store.dispatch({type:'login', loginUser: this.userLogin})
+        async login() {
+            await this.$store.dispatch({ type: 'login', loginUser: this.userLogin })
+            this.$router.push('/toy')
         }
     }
 }

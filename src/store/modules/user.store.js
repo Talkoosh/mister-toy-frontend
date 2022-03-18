@@ -28,5 +28,10 @@ export const userStore = {
                 // console.log(err)
             }
         }
+    },
+    getters : {
+        currUser(state){
+            if(state.loggedInUser) return JSON.parse(JSON.stringify(state.loggedInUser));
+        }
     }
 }

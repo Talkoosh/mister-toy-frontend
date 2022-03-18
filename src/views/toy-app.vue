@@ -19,7 +19,8 @@ export default {
     computed: {
         toys() {
             return this.$store.getters.filteredToys
-        }
+        },
+        
     },
     methods: {
         addToy(toyToAdd) {
@@ -34,7 +35,6 @@ export default {
         setSort(sortBy) {
             this.$store.commit({ type: 'setSort', sortBy })
         }
-
     }
 
 }
