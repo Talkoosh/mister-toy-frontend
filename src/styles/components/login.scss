@@ -1,0 +1,27 @@
+.login-screen-btns {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form {
+    h1 {
+        text-align: center;
+    }
+    .form-btn {
+        margin-left: 0;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+        .el-form-item {
+            .el-form-item__content {
+                margin-left: 0 !important;
+            }
+        }
+
+    .submit-input{
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+    }
+}
