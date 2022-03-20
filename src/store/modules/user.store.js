@@ -20,7 +20,7 @@ export const userStore = {
                 const user = await userService.signup(newUser);
                 commit({ type: 'login', user })
             } catch(err){
-                console.log(err);
+                throw err
             }
         },
         async login({commit}, {loginUser}){
@@ -28,7 +28,7 @@ export const userStore = {
                 const user = await userService.login(loginUser);
                 commit({type: 'login', user})
             } catch(err){
-                console.log(err)
+                throw err
             }
         },
         async logout({commit}){

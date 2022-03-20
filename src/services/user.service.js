@@ -11,8 +11,8 @@ const KEY = 'USER'
 
 async function signup(user) {
     try {
-        console.log('backend works');
         const newUser = await httpService.post('auth/signup', user);
+        console.log('backend works');
         await _saveToStorage(newUser)
         return newUser;
     } catch (err) {

@@ -40,7 +40,7 @@
             <el-input v-model="userSignup.username" type="text" autocomplete="off" required />
         </el-form-item>
         <el-form-item label="password" prop="pass">
-            <el-input type="password" v-model.number="userSignup.password" required />
+            <el-input type="password" v-model="userSignup.password" required />
         </el-form-item>
         <div class="form-btn-conainter">
             <el-form-item>
@@ -71,13 +71,24 @@ export default {
     },
     methods: {
         async signup() {
-            await this.$store.dispatch({ type: 'signup', newUser: this.userSignup })
-            this.$router.push('/toy')
+            try {
+                await this.$store.dispatch({ type: 'signup', newUser: this.userSignup })
+                this.$router.push('/toy')
+            } catch (err) {
+                this.$router.push('/');
+                console.log(err);
+            }
 
         },
         async login() {
-            await this.$store.dispatch({ type: 'login', loginUser: this.userLogin })
-            this.$router.push('/toy')
+            try {
+                await this.$store.dispatch({ type: 'login', loginUser: this.userLogin })
+                this.$router.push('/toy')
+            } catch (err) {
+                this.$router.push('/');
+                console.log(err);
+                return
+            }
         }
     }
 }
