@@ -34,6 +34,11 @@ export const userStore = {
         async logout({commit}){
             await userService.logout()
             commit('logout')
+        },
+        async loadUser({commit}){
+            const user = await userService.loadFromStorage();
+            if(!user) return;
+            commit({type: 'login', user})
         }
     },
     getters : {

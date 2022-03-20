@@ -7,8 +7,11 @@ const authAxios = axios.create({
 export const userService = {
     signup,
     login,
-    logout
+    logout,
+    loadFromStorage,
 }
+
+const KEY = 'USER'
 
 const API = (process.env.NODE_ENV !== 'development')
     ? '/api/auth/'
@@ -17,6 +20,7 @@ const API = (process.env.NODE_ENV !== 'development')
 async function signup(user) {
     try {
         const newUser = await authAxios.post(API + 'signup', user);
+        await _saveToStorage(newUser)
         return newUser.data;
     } catch (err) {
         throw err
@@ -26,16 +30,34 @@ async function signup(user) {
 async function login(user) {
     try {
         const loggedInUser = await authAxios.post(API + 'login', user);
+        await _saveToStorage(loggedInUser)
         return loggedInUser.data;
     } catch (err) {
         throw err
     }
 }
 
-async function logout(){
+async function logout() {
     try {
-      return await authAxios.post(API + 'logout');
-    } catch(err){
+        await _clearStorage();
+        return await authAxios.post(API + 'logout');
+    } catch (err) {
         throw err
     }
+}
+
+async function _saveToStorage(user) {
+    sessionStorage.setItem(KEY, JSON.stringify(user));
+    return Promise.resolve();
+}
+
+async function loadFromStorage() {
+    let user = sessionStorage.getItem(KEY);
+    user = JSON.parse(user)
+    return Promise.resolve(user.data)
+}
+
+async function _clearStorage() {
+    sessionStorage.clear();
+    return Promise.resolve();
 }

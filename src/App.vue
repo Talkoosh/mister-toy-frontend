@@ -10,6 +10,7 @@ import toyApp from './views/toy-app.vue'
 export default {
     created() {
         this.$store.dispatch('loadToys')
+        this.$store.dispatch('loadUser')
     },
     components: {
         appHeader,
