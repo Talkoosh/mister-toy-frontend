@@ -1,6 +1,5 @@
 import { utilService } from "./util.service.js"
-import { storageService } from "./asyncStorageService.js"
-import axios from 'axios'
+import {httpService} from './http.service.js'
 
 export const toyService = {
     loadToys,
@@ -10,12 +9,7 @@ export const toyService = {
 }
 
 
-const labels = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor"]
-
 const TOY_KEY = 'TOY';
-const API = (process.env.NODE_ENV !== 'development')
-    ? '/api/toy/'
-    : 'http://localhost:3030/api/toy/';
 
 async function loadToys() {
     // return storageService.query(TOY_KEY)
@@ -27,8 +21,8 @@ async function loadToys() {
     // return axios.get(API)
     //     .then(res => res.data)
     try {
-        const res = await axios.get(API);
-        return res.data;
+        const res = await httpService.get('toy/');
+        return res;
     } catch (err) {
         console.log('Couldn\'t get toys:', err);
     }
@@ -46,8 +40,8 @@ async function getToyById(id) {
     //     .then(res => res.data)
 
     try {
-        const res = await axios.get(API + id);
-        return res.data;
+        const res = await httpService.get(`toy/${id}/`);
+        return res;
     } catch (err) {
         console.log('Couldn\'t get toy:', err);
     }
@@ -57,8 +51,8 @@ async function getToyById(id) {
 async function save(toy) {
     // const prm = (toy._id) ? storageService.put(TOY_KEY, toy) : storageService.post(TOY_KEY, toy);
     try {
-        const res = (toy._id) ? await axios.put(API, toy) : await axios.post(API, toy)
-        return res.data
+        const res = (toy._id) ? await httpService.put('toy/', toy) : await httpService.post('toy/', toy)
+        return res
     } catch(err){
         console.log('Couldn\'t save toy:', err);
     }
@@ -70,8 +64,8 @@ async function removeToy(toyId) {
     // return axios.delete(API + toyId);
 
     try {
-        const res = await axios.delete(API + toyId);
-        return res.data;
+        const res = await httpService.delete(`toy/${toyId}/`);
+        return res;
     } catch(err){
         console.log('Couldn\'t get toys:', err);
     }

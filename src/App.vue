@@ -23,7 +23,6 @@ export default {
     },
     methods:{
         async logout(){
-            console.log('hi');
             await this.$store.dispatch('logout')
             this.$router.push('/')
         }

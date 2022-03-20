@@ -1,8 +1,4 @@
-import axios from 'axios'
-
-const authAxios = axios.create({
-    withCredentials: true,
-})
+import { httpService } from "./http.service.js";
 
 export const userService = {
     signup,
@@ -13,15 +9,12 @@ export const userService = {
 
 const KEY = 'USER'
 
-const API = (process.env.NODE_ENV !== 'development')
-    ? '/api/auth/'
-    : 'http://localhost:3030/api/auth/';
-
 async function signup(user) {
     try {
-        const newUser = await authAxios.post(API + 'signup', user);
+        console.log('backend works');
+        const newUser = await httpService.post('auth/signup', user);
         await _saveToStorage(newUser)
-        return newUser.data;
+        return newUser;
     } catch (err) {
         throw err
     }
@@ -29,9 +22,9 @@ async function signup(user) {
 
 async function login(user) {
     try {
-        const loggedInUser = await authAxios.post(API + 'login', user);
+        const loggedInUser = await httpService.post('auth/login', user);
         await _saveToStorage(loggedInUser)
-        return loggedInUser.data;
+        return loggedInUser;
     } catch (err) {
         throw err
     }
@@ -40,7 +33,7 @@ async function login(user) {
 async function logout() {
     try {
         await _clearStorage();
-        return await authAxios.post(API + 'logout');
+        return await httpService.post('auth/logout');
     } catch (err) {
         throw err
     }
@@ -53,8 +46,9 @@ async function _saveToStorage(user) {
 
 async function loadFromStorage() {
     let user = sessionStorage.getItem(KEY);
+    if(!user) return 
     user = JSON.parse(user)
-    return Promise.resolve(user.data)
+    return user
 }
 
 async function _clearStorage() {

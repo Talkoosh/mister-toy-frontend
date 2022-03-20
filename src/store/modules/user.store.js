@@ -6,7 +6,7 @@ export const userStore = {
             loggedInUser: null
         }
     },
-    mutations: {
+    mutations: { 
         login(state, { user }) {
             state.loggedInUser = user;
         },
@@ -28,7 +28,7 @@ export const userStore = {
                 const user = await userService.login(loginUser);
                 commit({type: 'login', user})
             } catch(err){
-                // console.log(err)
+                console.log(err)
             }
         },
         async logout({commit}){
